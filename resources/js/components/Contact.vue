@@ -185,11 +185,8 @@ export default {
 
       console.log(this.form);
     },
-    getJustPhoneNumbers(maskValue) {
+    removeWhiteSpaces(maskValue) {
       let numbers;
-      numbers = maskValue.replace("(", "");
-      numbers = numbers.replace(")", "");
-      numbers = numbers.replace("-", "");
       numbers = numbers.replace(" ", "");
       return numbers;
     },
@@ -198,7 +195,7 @@ export default {
       const url = "http://localhost:8000/api/contact/send";
       formData.append("name", this.form.name);
       formData.append("email", this.form.email);
-      formData.append("phone", this.getJustPhoneNumbers(this.form.phone));
+      formData.append("phone", this.removeWhiteSpaces(this.form.phone));
       formData.append("message", this.form.message);
       if (this.form.attached_file) {
         formData.append("attached_file", this.form.attached_file);

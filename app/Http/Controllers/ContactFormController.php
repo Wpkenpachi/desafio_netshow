@@ -16,7 +16,7 @@ class ContactFormController extends Controller
         $validator = Validator::make($request->all(), [
             'name'          => 'required|string',
             'email'         => 'required|email',
-            'phone'         => 'required|string|min:10|max:11',
+            'phone'         => 'required|celular_com_ddd',
             'message'       => 'required',
             'attached_file' => 'required|mimes:docx,doc,pdf,odt,txt|max:500'
         ]);

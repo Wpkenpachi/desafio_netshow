@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "63f047df57e41acb9eba292fafb10a7a",
+    "content-hash": "f382bb04da03665792ad85ff8b94ca02",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -1279,6 +1279,43 @@
                 "random"
             ],
             "time": "2018-07-02T15:55:56+00:00"
+        },
+        {
+            "name": "phplegends/pt-br-validator",
+            "version": "2.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phplegends/laravel-pt-br-validator.git",
+                "reference": "0c527a5ad1c265bba2697c8c31f02906f5af44e6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phplegends/laravel-pt-br-validator/zipball/0c527a5ad1c265bba2697c8c31f02906f5af44e6",
+                "reference": "0c527a5ad1c265bba2697c8c31f02906f5af44e6",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "5.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "PHPLegends\\PtBrValidator\\": "src/pt-br-validator"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Wallace de Souza Vizerra",
+                    "email": "wallacemaxters@gmail.com"
+                }
+            ],
+            "description": "Uma biblioteca contendo validações de formatos Brasileiros, para o Laravel 5",
+            "abandoned": "laravellegends/pt-br-validator",
+            "time": "2016-05-23T19:27:52+00:00"
         },
         {
             "name": "phpoption/phpoption",

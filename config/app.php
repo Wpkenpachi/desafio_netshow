@@ -165,6 +165,7 @@ return [
         /*
          * Package Service Providers...
          */
+        PHPLegends\PtBrValidator\ValidatorProvider::class,
 
         /*
          * Application Service Providers...
