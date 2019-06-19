@@ -47,7 +47,7 @@ class ContactFormController extends Controller
             'attached_file' => Storage::url($file_path)
         ]);
 
-        $myEmail = env('EMAIL_TO_SEND');
+        $myEmail = $contact->email;
 
         try {
             Mail::to($myEmail)->send(new ContactMail([
