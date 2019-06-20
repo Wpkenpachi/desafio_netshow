@@ -28,7 +28,7 @@ class ContactMessage extends Mailable
      */
     public function build()
     {
-        $address = $this->data['email'];
+        $address = 'company@email.com';
         $subject = 'Nova Mensagem da Contato';
 
         return $this->view('email.contactMessage')
