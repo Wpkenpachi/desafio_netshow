@@ -53,6 +53,7 @@ MAIL_PORT=587
 MAIL_USERNAME=null
 MAIL_PASSWORD=null
 MAIL_ENCRYPTION=tls
+MAIL_FROM_ADDRESS=company@gmail.com // Setar email pra onde as mensagens vão
 ```
 
 No próprio Mailtrap tem as _credentials_ pra serem copiadas e coladas no .env
