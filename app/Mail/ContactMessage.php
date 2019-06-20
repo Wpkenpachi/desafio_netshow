@@ -28,20 +28,20 @@ class ContactMessage extends Mailable
      */
     public function build()
     {
-        $address = $this->data['email'];
+        $address = 'company@gmail.com';
         $subject = 'Nova Mensagem da Contato';
 
         return $this->view('email.contactMessage')
-                    ->from($address, $this->data['name'])
-                    ->cc($address, $this->data['name'])
-                    ->bcc($address, $this->data['name'])
-                    ->replyTo($address, $this->data['name'])
-                    ->subject($subject)
-                    ->with([
-                        '_name'      => $this->data['name'],
-                        '_message'   => $this->data['message'],
-                        '_ourEmail'  => $address,
-                        '_path_file' => trim( $this->data['file_path'], '/')
-                    ]);
+        ->from($address, $this->data['name'])
+        ->cc($address, $this->data['name'])
+        ->bcc($address, $this->data['name'])
+        ->replyTo($address, $this->data['name'])
+        ->subject($subject)
+        ->with([
+            '_name'      => $this->data['name'],
+            '_message'   => $this->data['message'],
+            '_ourEmail'  => $address,
+            '_path_file' => trim( $this->data['file_path'], '/')
+        ]);
     }
 }

@@ -8,13 +8,6 @@
         CONTACT PAGE LEFT 
         
       ----------------->
-      <div
-        v-if="showSuccessAlert"
-        class="alert alert-success"
-        role="alert"
-      >Sua mensagem foi enviada com sucesso!!</div>
-
-      <div v-if="showErrorAlert" class="alert alert-warning" role="alert">{{ ErrorAlertmessage }}</div>
 
       <form @submit="$event.preventDefault()" class="form-horizontal" role="form">
         <div class="form-group">
@@ -46,8 +39,6 @@
 
         <div class="form-group">
           <div class="col-sm-12">
-            <!-- <the-mask class="form-control" mask="['(##) ####-####', '(##) #####-####']" v-model="form.phone" type="text" masked="false" placeholder="TELEFONE" required></the-mask> -->
-
             <input
               type="tel"
               class="form-control"
@@ -63,11 +54,7 @@
 
         <div class="input-group" style="margin-bottom: 15px;">
           <div class="input-group-prepend">
-            <span
-              class="input-group-text"
-              style="background-color: #3490dc; border-color: #3490dc; color: white"
-              id="inputGroupFileAddon01"
-            >Upload</span>
+            <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
           </div>
           <div class="custom-file form-group upload-btn">
             <input
@@ -79,18 +66,10 @@
               name="attached_file"
             >
             <label
-              v-if="!form.filename"
               style="background-color: #111"
               class="custom-file-label"
               for="inputGroupFile01"
             >Tipo pdf, doc, docx, odt ou txt|500 kb</label>
-
-            <label
-              v-else
-              style="background-color: #111"
-              class="custom-file-label"
-              for="inputGroupFile01"
-            >{{ form.filename }}</label>
           </div>
         </div>
 
@@ -144,7 +123,7 @@
           <li class="list-item">
             <i class="fa fa-envelope fa-2x">
               <span class="contact-text gmail">
-                <a href="mailto:#" title="Send me an email">company@gmail.com</a>
+                <a href="mailto:#" title="Send me an email">emailme@gmail.com</a>
               </span>
             </i>
           </li>
@@ -164,9 +143,6 @@ export default {
   directives: { mask },
   data() {
     return {
-      showSuccessAlert: false,
-      showErrorAlert: false,
-      ErrorAlertmessage: "",
       error: false,
       allowedMimes: [
         "application/vnd.oasis.opendocument.text", // odt
@@ -180,24 +156,9 @@ export default {
         phone: "",
         email: "",
         message: "",
-        attached_file: null,
-        filename: ""
+        attached_file: null
       }
     };
-  },
-  watch: {
-    showSuccessAlert: function(val) {
-      if (val) {
-        this.form = {
-          name: "",
-          phone: "",
-          email: "",
-          message: "",
-          attached_file: null,
-          filename: ""
-        };
-      }
-    }
   },
   methods: {
     getAttachedFile(event) {
@@ -219,65 +180,35 @@ export default {
         this.error = true;
         alert("Arquivo muito grande. Máximo aceito é de 500kb");
       }
-
-      this.form.filename = file.name;
-      console.log(this.form);
     },
-    removeWhiteSpaces(maskValue) {
-      return maskValue.replace(" ", "");
+    getJustPhoneNumbers(maskValue) {
+      let numbers;
+      numbers = maskValue.replace("(", "");
+      numbers = numbers.replace(")", "");
+      numbers = numbers.replace("-", "");
+      numbers = numbers.replace(" ", "");
+      return numbers;
     },
     async sendMessage(event) {
       const formData = new FormData();
-      let url = "https://desafio-netshow.herokuapp.com/api/contact/send";
-      url = "http://localhost:8000/api/contact/send";
-
-      if (this.form.name) {
-        formData.append("name", this.form.name);
-      }
-
-      if (this.form.email) {
-        formData.append("email", this.form.email);
-      }
-
-      if (this.form.phone) {
-        formData.append("phone", this.removeWhiteSpaces(this.form.phone));
-      }
-
-      if (this.form.message) {
-        formData.append("message", this.form.message);
-      }
-
+      const url = "http://localhost:8000/api/contact/send";
+      formData.append("name", this.form.name);
+      formData.append("email", this.form.email);
+      formData.append("phone", this.getJustPhoneNumbers(this.form.phone));
+      formData.append("message", this.form.message);
       if (this.form.attached_file) {
         formData.append("attached_file", this.form.attached_file);
       } else {
         alert("Envie um arquivo!");
       }
-
       const config = {
         headers: {
-          "Content-Type": "multipart/form-data",
-          "X-CSRF-TOKEN": window.Laravel.csrfToken
+          "Content-Type": "multipart/form-data"
         }
       };
 
       if (!this.error) {
-        const { data } = await post(url, formData, config);
-
-        if (data.status == "success") {
-          this.showSuccessAlert = true;
-          setTimeout(() => {
-            this.showSuccessAlert = false;
-          }, 3500);
-        } else {
-          const keys = Object.keys(data);
-          this.showErrorAlert = true;
-          console.log(data[keys[0]]);
-          this.ErrorAlertmessage = data[keys[0]][0];
-          setTimeout(() => {
-            this.showErrorAlert = false;
-          }, 3500);
-        }
-        console.log(data);
+        const response = await post(url, formData, config);
       }
     }
   }
@@ -286,12 +217,6 @@ export default {
 
 
 <style scoped>
-.custom-file-label::after {
-  background-color: #3490dc;
-  border-color: #3490dc;
-  color: white;
-}
-
 .col-sm-12 {
   padding: 0px !important;
 }
