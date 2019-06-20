@@ -16,6 +16,8 @@
 
       <div v-if="showErrorAlert" class="alert alert-warning" role="alert">{{ ErrorAlertmessage }}</div>
 
+      <spinner v-if="isLoading" size="big" message="Enviando..."></spinner>
+
       <form @submit="$event.preventDefault()" class="form-horizontal" role="form">
         <div class="form-group">
           <div class="col-sm-12">
@@ -159,15 +161,20 @@
 <script>
 import { mask } from "vue-the-mask";
 import axios, { post } from "axios";
+import Spinner from "vue-simple-spinner";
 
 export default {
   directives: { mask },
+  components: {
+    spinner: Spinner
+  },
   data() {
     return {
       showSuccessAlert: false,
       showErrorAlert: false,
       ErrorAlertmessage: "",
       error: false,
+      isLoading: false,
       allowedMimes: [
         "application/vnd.oasis.opendocument.text", // odt
         "text/plain", // txt
@@ -261,9 +268,11 @@ export default {
       };
 
       if (!this.error) {
+        this.isLoading = true;
         const { data } = await post(url, formData, config);
 
         if (data.status == "success") {
+          this.isLoading = false;
           this.showSuccessAlert = true;
           setTimeout(() => {
             this.showSuccessAlert = false;
