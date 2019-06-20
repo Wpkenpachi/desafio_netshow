@@ -166,6 +166,7 @@ return [
          * Package Service Providers...
          */
         PHPLegends\PtBrValidator\ValidatorProvider::class,
+        Barryvdh\Cors\ServiceProvider::class,
 
         /*
          * Application Service Providers...
