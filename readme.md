@@ -5,12 +5,6 @@
 -   Composer
 -   PHP >= 7
 
-## Observação
-
-Aqui se encontram instruções sobre como configurar e rodar a aplicação. Porém estarei disponibilizando também
-uma url com o serviço já rodando, onde o endereço de email pra onde será enviada a mensagem, será o mesmo
-do informado no formulário de contatos. Favor verificar a pasta de spam do email!!!.
-
 ## Instalando dependências do Composer ( Caso necessário )
 
 -   composer install
@@ -74,3 +68,16 @@ _BTW_ os testes se encontram no arquivo ContactMessageTest.php dentro de _tests/
 ## Subindo o Servidor
 
 Pra subir o servidor localmente, apenas digite o comando **\$ php artisan serve** no terminal, na pasta raiz do repositório.
+
+## Abrindo a Página de Contatos
+
+Após rodar o servidor entrar na url **[http://localhost:8000/contact](http://localhost:8000/contact)**
+
+## Checando Emails
+
+Abra o Mailtrap em sua conta, e abra a sua inbox demo / ou a que vc tiver criado. Lá vai estar o Email. Será algo parecido com isso:
+![Mailtrap!](./readme_img_2.png "Mailtrap Demo Inbox")
+
+![Mailtrap!](./readme_img_3.png "Mailtrap Email List")
+
+![Mailtrap!](./readme_img_4.png "Mailtrap Email Body")
