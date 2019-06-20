@@ -50,19 +50,19 @@ class ContactFormController extends Controller
 
         $myEmail = $contact->email;
 
-        try {
-            Mail::to($myEmail)->send(new ContactMail([
-                'name'      => $contact->name,
-                'email'     => $contact->email,
-                'message'   => $contact->message,
-                'file_path' => trim($contact->attached_file, '/')
-            ]));
+        Mail::to($myEmail)->send(new ContactMail([
+            'name'      => $contact->name,
+            'email'     => $contact->email,
+            'message'   => $contact->message,
+            'file_path' => trim($contact->attached_file, '/')
+        ]));
 
+        if ( !count(Mail::failures()) ) {
             return response()
             ->json(['status' => 'success']);
-        } catch (\Throwable $th) {
+        } else {
             return response()
-            ->json(['status' => 'fail']);   
+            ->json(['status' => 'fail']);      
         }
     }
 }

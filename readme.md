@@ -50,17 +50,19 @@ rodar o comando **\$ php artisan migrate** no terminal, na pasta raiz do reposit
 
 ## Configurações de Serviço externo de Email
 
+Escolhi o serviço da mailtrap pra utilizar nesse desafio.
+
 ```
 MAIL_DRIVER=smtp
 MAIL_HOST=smtp.sendgrid.net
 MAIL_PORT=587
-MAIL_USERNAME=null                  // Criar uma conta gratuita no sendgrid e colocar seu usuário aqui
-MAIL_PASSWORD=null                  // Senha da conta no sendgrid
+MAIL_USERNAME=null
+MAIL_PASSWORD=null
 MAIL_ENCRYPTION=tls
-EMAIL_TO_SEND=email@definido.com    // Endereço de email pra onde os emails de contato serão envidos
 ```
 
-Serviço de email que escolhi pro desafio **[Sendgrid](https://sendgrid.com)**.
+No próprio Mailtrap tem as _credentials_ pra serem copiadas e coladas no .env
+![Mailtrap!](./readme_img_1.png "Mailtrap Credentials")
 
 ## Subindo o Servidor
 

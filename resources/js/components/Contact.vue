@@ -200,7 +200,7 @@ export default {
     },
     async sendMessage(event) {
       const formData = new FormData();
-      const url = "https://desafio-netshow.herokuapp.com/api/contact/send";
+      let url = "https://desafio-netshow.herokuapp.com/api/contact/send";
       formData.append("name", this.form.name);
       formData.append("email", this.form.email);
       formData.append("phone", this.removeWhiteSpaces(this.form.phone));
