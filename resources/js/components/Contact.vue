@@ -68,10 +68,18 @@
               name="attached_file"
             >
             <label
+              v-if="!form.filename"
               style="background-color: #111"
               class="custom-file-label"
               for="inputGroupFile01"
             >Tipo pdf, doc, docx, odt ou txt|500 kb</label>
+
+            <label
+              v-else
+              style="background-color: #111"
+              class="custom-file-label"
+              for="inputGroupFile01"
+            >{{ form.filename }}</label>
           </div>
         </div>
 
@@ -158,7 +166,8 @@ export default {
         phone: "",
         email: "",
         message: "",
-        attached_file: null
+        attached_file: null,
+        filename: ""
       }
     };
   },
@@ -183,6 +192,7 @@ export default {
         alert("Arquivo muito grande. Máximo aceito é de 500kb");
       }
 
+      this.form.filename = file.name;
       console.log(this.form);
     },
     removeWhiteSpaces(maskValue) {
@@ -190,7 +200,7 @@ export default {
     },
     async sendMessage(event) {
       const formData = new FormData();
-      const url = "http://localhost:8000/api/contact/send";
+      const url = "https://desafio-netshow.herokuapp.com/api/contact/send";
       formData.append("name", this.form.name);
       formData.append("email", this.form.email);
       formData.append("phone", this.removeWhiteSpaces(this.form.phone));
