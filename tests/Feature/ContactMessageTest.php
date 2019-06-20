@@ -25,6 +25,7 @@ class ContactMessageTest extends TestCase
         $this->postWithOutName();
         $this->postWithOutEmail();
         $this->postWithOutPhone();
+        $this->postWithInvalidPhone();
         $this->postWithOutMessage();
         $this->postWithOutFile();
         $this->postWithNotAllowedExt();
@@ -41,7 +42,7 @@ class ContactMessageTest extends TestCase
             'name'          => 'Wesley',
             'email'         => 'wesley@email.com',
             'message'       => 'This is a test message',
-            'phone'         => '77988794505',
+            'phone'         => '(99)99999-9999',
             'attached_file' => $file
         ]);
 
@@ -61,7 +62,7 @@ class ContactMessageTest extends TestCase
             'name'          => null,
             'email'         => 'wesley@email.com',
             'message'       => 'This is a test message',
-            'phone'         => '77988794505',
+            'phone'         => '(99)99999-9999',
             'attached_file' => $file
         ]);
 
@@ -82,7 +83,7 @@ class ContactMessageTest extends TestCase
             'name'          => 'Wesley',
             'email'         => null,
             'message'       => 'This is a test message',
-            'phone'         => '77988794505',
+            'phone'         => '(99)99999-9999',
             'attached_file' => $file
         ]);
 
@@ -103,7 +104,7 @@ class ContactMessageTest extends TestCase
             'name'          => 'Wesley',
             'email'         => 'wesley@email.com',
             'message'       => null,
-            'phone'         => '77988794505',
+            'phone'         => '(99)99999-9999',
             'attached_file' => $file
         ]);
 
@@ -136,6 +137,28 @@ class ContactMessageTest extends TestCase
         ]);
     }
 
+    public function postWithInvalidPhone() {
+        echo "Testando Caso de envio com o campo Phone Inválido!\n";
+        $file = UploadedFile::fake()->create('public/asset/mycv.pdf', 450);
+
+        $response = $this->withHeaders([
+            "Content-Type" => "multipart/form-data",
+        ])->json('POST', '/api/contact/send', [
+            'name'          => 'Wesley',
+            'email'         => 'wesley@email.com',
+            'message'       => 'This is a test message',
+            'phone'         => '999999-99',
+            'attached_file' => $file
+        ]);
+
+        $response->assertStatus(200)
+        ->assertJson([
+            "phone" => [
+                "O campo phone está com valor inválido"
+            ]
+        ]);
+    }
+
     public function postWithOutFile() {
         echo "Testando Caso de envio sem o campo File!\n";
         $response = $this->withHeaders([
@@ -144,7 +167,7 @@ class ContactMessageTest extends TestCase
             'name'          => 'Wesley',
             'email'         => 'wesley@email.com',
             'message'       => 'This is a test message',
-            'phone'         => '77988794505'
+            'phone'         => '(99)99999-9999'
         ]);
 
         $response->assertStatus(200)
@@ -165,7 +188,7 @@ class ContactMessageTest extends TestCase
             'name'          => 'Wesley',
             'email'         => 'wesley@email.com',
             'message'       => 'This is a test message',
-            'phone'         => '77988794505',
+            'phone'         => '(99)99999-9999',
             'attached_file' => $file
         ]);
 
@@ -187,7 +210,7 @@ class ContactMessageTest extends TestCase
             'name'          => 'Wesley',
             'email'         => 'wesley@email.com',
             'message'       => 'This is a test message',
-            'phone'         => '77988794505',
+            'phone'         => '(99)99999-9999',
             'attached_file' => $file
         ]);
 

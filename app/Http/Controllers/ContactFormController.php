@@ -19,7 +19,8 @@ class ContactFormController extends Controller
             'phone'         => 'required|celular_com_ddd',
             'message'       => 'required',
             'attached_file' => 'required|mimes:docx,doc,pdf,odt,txt|max:500'
-        ]);
+        ], 
+        ['celular_com_ddd' => 'O campo :attribute está com valor inválido']);
 
         if ($validator->fails()) {
             return response()->json($validator->errors());
