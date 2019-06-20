@@ -64,13 +64,13 @@ MAIL_ENCRYPTION=tls
 No próprio Mailtrap tem as _credentials_ pra serem copiadas e coladas no .env
 ![Mailtrap!](./readme_img_1.png "Mailtrap Credentials")
 
-## Subindo o Servidor
-
-Pra subir o servidor localmente, apenas digite o comando **\$ php artisan serve** no terminal, na pasta raiz do repositório.
-
 ## Rodando os Testes
 
 Para rodar os testes que preparei pra aplicação apenas digite o comando
 **\$ ./vendor/bin/phpunit -v** no terminal, na pasta raiz do repositório.
 
 _BTW_ os testes se encontram no arquivo ContactMessageTest.php dentro de _tests/Feature_
+
+## Subindo o Servidor
+
+Pra subir o servidor localmente, apenas digite o comando **\$ php artisan serve** no terminal, na pasta raiz do repositório.
