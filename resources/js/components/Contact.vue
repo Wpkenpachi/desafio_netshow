@@ -186,9 +186,7 @@ export default {
       console.log(this.form);
     },
     removeWhiteSpaces(maskValue) {
-      let numbers;
-      numbers = numbers.replace(" ", "");
-      return numbers;
+      return maskValue.replace(" ", "");
     },
     async sendMessage(event) {
       const formData = new FormData();
