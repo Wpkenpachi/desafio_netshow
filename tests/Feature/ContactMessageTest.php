@@ -14,25 +14,7 @@ class ContactMessageTest extends TestCase
 {
     use WithoutMiddleware;
 
-    /**
-     * A basic feature test example.
-     *
-     * @return void
-     */
-    public function testExample()
-    {
-        $this->postWithSuccess();
-        $this->postWithOutName();
-        $this->postWithOutEmail();
-        $this->postWithOutPhone();
-        $this->postWithInvalidPhone();
-        $this->postWithOutMessage();
-        $this->postWithOutFile();
-        $this->postWithNotAllowedExt();
-        $this->postWithFileOverloadingSize();
-    }
-
-    public function postWithSuccess () {
+    public function test_postWithSuccess () {
         echo "\nTestando Caso de Sucesso!\n";
         $file = UploadedFile::fake()->create('public/asset/mycv.pdf', 450);
 
@@ -52,7 +34,7 @@ class ContactMessageTest extends TestCase
         ]);
     }
 
-    public function postWithOutName() {
+    public function test_postWithOutName() {
         echo "Testando Caso de envio sem o campo Nome!\n";
         $file = UploadedFile::fake()->create('public/asset/mycv.pdf', 450);
 
@@ -73,7 +55,7 @@ class ContactMessageTest extends TestCase
         ]);
     }
 
-    public function postWithOutEmail() {
+    public function test_postWithOutEmail() {
         echo "Testando Caso de envio sem o campo Email!\n";
         $file = UploadedFile::fake()->create('public/asset/mycv.pdf', 450);
 
@@ -94,7 +76,7 @@ class ContactMessageTest extends TestCase
         ]);
     }
 
-    public function postWithOutMessage() {
+    public function test_postWithOutMessage() {
         echo "Testando Caso de envio sem o campo Message!\n";
         $file = UploadedFile::fake()->create('public/asset/mycv.pdf', 450);
 
@@ -115,7 +97,7 @@ class ContactMessageTest extends TestCase
         ]);
     }
 
-    public function postWithOutPhone() {
+    public function test_postWithOutPhone() {
         echo "Testando Caso de envio sem o campo Phone!\n";
         $file = UploadedFile::fake()->create('public/asset/mycv.pdf', 450);
 
@@ -137,7 +119,7 @@ class ContactMessageTest extends TestCase
         ]);
     }
 
-    public function postWithInvalidPhone() {
+    public function test_postWithInvalidPhone() {
         echo "Testando Caso de envio com o campo Phone Inválido!\n";
         $file = UploadedFile::fake()->create('public/asset/mycv.pdf', 450);
 
@@ -159,7 +141,7 @@ class ContactMessageTest extends TestCase
         ]);
     }
 
-    public function postWithOutFile() {
+    public function test_postWithOutFile() {
         echo "Testando Caso de envio sem o campo File!\n";
         $response = $this->withHeaders([
             "Content-Type" => "multipart/form-data",
@@ -178,7 +160,7 @@ class ContactMessageTest extends TestCase
         ]);
     }
 
-    public function postWithFileOverloadingSize() {
+    public function test_postWithFileOverloadingSize() {
         echo "Testando Caso de envio do arquivo com tamanho maior que o permitido!\n";
         $file = UploadedFile::fake()->create('public/asset/mycv.pdf', 600);
 
@@ -200,7 +182,7 @@ class ContactMessageTest extends TestCase
         ]);
     }
 
-    public function postWithNotAllowedExt() {
+    public function test_postWithNotAllowedExt() {
         echo "Testando Caso de envio de arquivo com extrensão não permitida!\n";
         $file = UploadedFile::fake()->create('public/asset/image.png');
 
